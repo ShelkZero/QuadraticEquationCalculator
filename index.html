@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор квадратных уравнений</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label {
+            margin-bottom: 10px;
+        }
+        input {
+            margin-left: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            margin-top: 20px;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Калькулятор квадратных уравнений</h1>
+    <form id="quadratic-form">
+        <label>
+            a:
+            <input type="number" id="a" required>
+        </label>
+        <label>
+            b:
+            <input type="number" id="b" required>
+        </label>
+        <label>
+            c:
+            <input type="number" id="c" required>
+        </label>
+        <button type="submit">Рассчитать</button>
+    </form>
+    <div class="result" id="result"></div>
+
+    <script>
+        document.getElementById('quadratic-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const a = parseFloat(document.getElementById('a').value);
+            const b = parseFloat(document.getElementById('b').value);
+            const c = parseFloat(document.getElementById('c').value);
+
+            const discriminant = b * b - 4 * a * c;
+            let result;
+
+            if (discriminant > 0) {
+                const x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+                const x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+                result = `Корни уравнения: x1 = ${x1}, x2 = ${x2}`;
+            } else if (discriminant === 0) {
+                const x = -b / (2 * a);
+                result = `Корень уравнения: x = ${x}`;
+            } else {
+                result = 'Уравнение не имеет действительных корней';
+            }
+
+            document.getElementById('result').innerText = result;
+        });
+    </script>
+</body>
+</html>
